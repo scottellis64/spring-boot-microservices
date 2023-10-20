@@ -5,16 +5,19 @@
 
     <parent>
         <groupId>com.sellis</groupId>
-        <artifactId>spring-boot-microservices</artifactId>
+        <artifactId>services</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <artifactId>infrastructure</artifactId>
     <packaging>pom</packaging>
-    <name>infrastructure</name>
+
+    <artifactId>kafka</artifactId>
+    <name>kafka</name>
 
     <modules>
-        <module>service-registry</module>
+        <module>sample-kafka-commons</module>
+        <module>sample-kafka-producer</module>
+        <module>sample-kafka-consumer</module>
     </modules>
 </project>
