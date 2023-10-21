@@ -1,15 +1,15 @@
+server:
+  port: 8080
+
 spring:
   application:
-    name: sample-kafka-consumer
+    name: gateway
 
   profiles:
-    active: native, kafka
+    active: native, gateway
 
   config:
     import: optional:configserver:http://localhost:8888
-
-server:
-  port: 8092
 
 eureka:
   password: password

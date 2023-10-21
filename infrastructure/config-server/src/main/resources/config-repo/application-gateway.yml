@@ -1,0 +1,20 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: address-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/address-service/**
+        - id: employee-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/employee-service/**
+        - id: config-server
+          uri: http://localhost:8888
+          predicates:
+            - Path=/config-server/**
+        - id: sample-kafka-producer
+          uri: http://localhost:8091
+          predicates:
+            - Path=/kafka-producer/**
