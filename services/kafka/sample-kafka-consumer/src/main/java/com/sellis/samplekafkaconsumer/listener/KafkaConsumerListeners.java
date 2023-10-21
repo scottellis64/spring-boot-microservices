@@ -22,7 +22,7 @@ public class KafkaConsumerListeners {
     private static final Logger logger =
             LoggerFactory.getLogger(KafkaConsumerListeners.class);
 
-    @KafkaListener(topics = "advice-topic", clientIdPrefix = "json",
+    @KafkaListener(topics = "#{'${kafka-app-config.topic.producer-send}'}", clientIdPrefix = "json",
             containerFactory = "kafkaListenerContainerFactory")
     public void listenAsObject(ConsumerRecord<String, TestPayload> cr,
                                @Payload TestPayload payload) {
@@ -30,7 +30,7 @@ public class KafkaConsumerListeners {
                 typeIdHeader(cr.headers()), payload, cr);
     }
 
-    @KafkaListener(topics = "advice-topic", clientIdPrefix = "string",
+    @KafkaListener(topics = "#{'${kafka-app-config.topic.producer-send}'}", clientIdPrefix = "string",
             containerFactory = "kafkaListenerStringContainerFactory")
     public void listenasString(ConsumerRecord<String, String> cr,
                                @Payload String payload) {
@@ -38,7 +38,7 @@ public class KafkaConsumerListeners {
                 typeIdHeader(cr.headers()), payload, cr);
     }
 
-    @KafkaListener(topics = "advice-topic", clientIdPrefix = "bytearray",
+    @KafkaListener(topics = "#{'${kafka-app-config.topic.producer-send}'}", clientIdPrefix = "bytearray",
             containerFactory = "kafkaListenerByteArrayContainerFactory")
     public void listenAsByteArray(ConsumerRecord<String, byte[]> cr,
                                   @Payload byte[] payload) {
@@ -51,5 +51,4 @@ public class KafkaConsumerListeners {
                 .filter(header -> header.key().equals("__TypeId__"))
                 .findFirst().map(header -> new String(header.value())).orElse("N/A");
     }
-
 }

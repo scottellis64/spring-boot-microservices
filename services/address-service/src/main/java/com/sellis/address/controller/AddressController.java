@@ -2,6 +2,7 @@ package com.sellis.address.controller;
 
 import com.sellis.address.response.AddressResponse;
 import com.sellis.address.service.AddressService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,9 @@ public class AddressController {
     @GetMapping("/address/{id}")
     private ResponseEntity<AddressResponse> getAddressByEmployeeId(@PathVariable("id") int id) {
         AddressResponse address = addressService.findAddressByEmployeeId(id);
+
+        address.setState(address.getState());
+
         return ResponseEntity.status(HttpStatus.OK).body(address);
     }
 }

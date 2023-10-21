@@ -26,8 +26,8 @@ public class KafkaProducerController {
 
     public KafkaProducerController(
             KafkaTemplate<String, Object> template,
-            @Value("${app.topic-name}") String topicName,
-            @Value("${app.messages-per-request}") int messagesPerRequest
+            @Value("${kafka-app-config.topic.producer-send}") String topicName,
+            @Value("${kafka-app-config.messages-per-request}") int messagesPerRequest
     ) {
         this.template = template;
         this.topicName = topicName;
@@ -36,6 +36,7 @@ public class KafkaProducerController {
 
     @GetMapping("/send")
     public String hello() throws Exception {
+        logger.info("Sending message to topic " + topicName);
 //        CountDownLatch latch = new CountDownLatch(messagesPerRequest);
         IntStream.range(0, messagesPerRequest)
                 .forEach(i -> this.template.send(topicName, String.valueOf(i),

@@ -1,8 +1,20 @@
 spring:
-  kafka:
-    consumer:
-      group-id: tpd-loggers
-      auto-offset-reset: earliest
-    # change this property if you are using your own
-    # Kafka cluster or your Docker IP is different
-    bootstrap-servers: localhost:9092
+  application:
+    name: sample-kafka-consumer
+
+  profiles:
+    active: native, kafka
+
+  config:
+    import: optional:configserver:http://localhost:8888
+
+eureka:
+  password: password
+  client:
+    serviceUrl:
+      defaultZone: http://user:${eureka.password}@localhost:8761/eureka/
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    metadataMap:
+      instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+

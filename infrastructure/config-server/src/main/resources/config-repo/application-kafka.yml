@@ -1,0 +1,12 @@
+spring:
+  kafka:
+    consumer:
+      group-id: sample-kafka-loggers
+      auto-offset-reset: earliest
+    bootstrap-servers: localhost:9092
+
+kafka-app-config:
+  messages-per-request: 10
+  topic:
+    producer-send: sample-kafka-producer-send
+    consumer-reply: sample-kafka-consumer-reply
