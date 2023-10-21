@@ -1,0 +1,7 @@
+# Without cloud, here we specify a configuration from our classpath, which here in resources/config-repo
+spring:
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/config-repo

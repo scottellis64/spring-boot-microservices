@@ -24,7 +24,7 @@ import java.util.Map;
 public class KafkaProducerConfig {
     private final KafkaProperties kafkaProperties;
 
-    @Value("${app.topic-name}")
+    @Value("${kafka-app-config.topic.producer-send}")
     private String topicName;
 
     public KafkaProducerConfig(
